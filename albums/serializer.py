@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from albums.models import Album, Track
+from albums.models import Album, Track, Artist
 
 
 class AlbumSerializerWithStringRelatedField(serializers.ModelSerializer):
@@ -52,9 +52,12 @@ class AlbumSerializerWithHyperLinkedIdentityField(serializers.HyperlinkedModelSe
 
 
 class TrackSerializer(serializers.ModelSerializer):
+    album = serializers.PrimaryKeyRelatedField(read_only=True)
+    artist = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Track
-        fields = ('order', 'title', 'duration')
+        fields = ('order', 'title', 'duration', 'album', 'artist')
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -62,4 +65,10 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = ('album_name', 'artist', 'tracks')
+        fields = ('album_name', 'tracks')
+
+
+class ArtistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = ('name',)
