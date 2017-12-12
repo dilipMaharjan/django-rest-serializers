@@ -19,8 +19,9 @@ class TrackListViewSet(ModelViewSet):
         filter = {}
         artist_name = self.request.query_params.get('artist_name', None)
         album_name = self.request.query_params.get('album_name', None)
-        filter['artist__name'] = artist_name
-        filter['album__name'] = album_name
+        if artist_name is not None and album_name is not None:
+            filter['artist__name'] = artist_name
+            filter['album__name'] = album_name
         return Track.objects.filter(**filter)
 
 
