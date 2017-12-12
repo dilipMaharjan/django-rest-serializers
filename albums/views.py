@@ -1,3 +1,4 @@
+from django.forms import model_to_dict
 from rest_framework.viewsets import ModelViewSet
 
 from albums.serializer import ArtistSerializer, TrackSerializer, AlbumSerializer
@@ -16,8 +17,10 @@ class TrackListViewSet(ModelViewSet):
 
     def get_queryset(self):
         filter = {}
-        filter['artist__name'] = "Caleb"
-        filter['album__name'] = "The Grey Album"
+        artist_name = self.request.query_params.get('artist_name', None)
+        album_name = self.request.query_params.get('album_name', None)
+        filter['artist__name'] = artist_name
+        filter['album__name'] = album_name
         return Track.objects.filter(**filter)
 
 
