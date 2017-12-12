@@ -1,0 +1,5 @@
+
+/db.sqlite3
+/albums/migrations/
+/albums/__pycache__/
+/viewsets/__pycache__/
