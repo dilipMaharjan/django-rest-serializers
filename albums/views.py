@@ -1,9 +1,9 @@
-from django.forms import model_to_dict
+import logging
+from albums.models import Artist, Track, Album
+from albums.serializer import ArtistSerializer, TrackSerializer, AlbumSerializer
 from rest_framework.viewsets import ModelViewSet
 
-from albums.serializer import ArtistSerializer, TrackSerializer, AlbumSerializer
-
-from albums.models import Artist, Track, Album
+logger = logging.getLogger(__name__)
 
 
 class ArtistListViewSet(ModelViewSet):
@@ -28,3 +28,4 @@ class TrackListViewSet(ModelViewSet):
 class AlbumListViewSet(ModelViewSet):
     queryset = Album.objects.filter()
     serializer_class = AlbumSerializer
+    logger.info("This is a logger info")
