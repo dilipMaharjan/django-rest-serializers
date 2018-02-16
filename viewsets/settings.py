@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'albums',
     'debug_toolbar',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
